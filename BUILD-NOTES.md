@@ -7,10 +7,14 @@ Built from TALIA-PAGE-OUTLINE.md (Nov 25, 2026). Static HTML/CSS/JS; no build st
 - Archived Golem snapshot is explicitly dated; not represented as live.
 - Book link, socials and newsletter deliberately not connected.
 
+## Artwork for review
+- Generated porch and kitchen illustrations follow the outline. The source avatar and kitchen photograph referenced there were unavailable locally, so likeness and final art approval are pending.
+- The page includes the lantern states, film rails and grain, contact-sheet sketches, HOWIE sticker, clapperboard, speech bubble, exposure dials, letter texture, locked door, social card, lantern icons, and custom 404 art.
+- The social image uses a local asset path. Set an absolute social image URL once the public origin is confirmed.
+
 ## Awaiting approval/assets
-- Approved Talia hero portrait and kitchen photograph: **not available in this repository**. Current visuals are clearly labeled placeholders, not falsely presented as her photographs.
 - Prequel download URL, social destinations, copyright text, sign-off for newly drafted bad-advice lines.
-- Optional OG image, illustration polish, performance and WCAG browser audit.
+- Optional performance and WCAG browser audit.
 - No deployment or Cloudflare Pages integration performed.
 
 ## Local preview

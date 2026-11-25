@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 155">
+<defs><radialGradient id="glow"><stop stop-color="#ffb347" stop-opacity=".55"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient></defs><ellipse cx="60" cy="69" rx="60" ry="66" fill="url(#glow)"/><path d="M42 35h36l20 21-13 55H35L22 56z" fill="#242637" stroke="#ffb347" stroke-width="3"/><path d="M45 53h30l8 9-9 39H46l-9-39z" fill="#ffb347"/><path d="M59 48v57M23 56h74M43 34l7-10h20l8 10" fill="none" stroke="#e4a051" stroke-width="3"/><path d="M60 112v32" stroke="#bd905f" stroke-width="2" stroke-dasharray="3 4"/><circle cx="60" cy="146" r="4" fill="#ffb347"/>
+</svg>
