@@ -1,4 +1,79 @@
-const advice=[ "Stuck in a meeting that should have been an email? Fix it by being the email. Stand very still and stop talking. They'll adjourn out of fear.","If you can't decide, flip a coin. If you don't like the result, flip it again. Best out of fifty is just being thorough.","Nervous about a first date? Arrive an hour early so you can scout the exits. They'll be so impressed they'll assume you're a spy. That's still a good first impression.","Cooking something and it smells weird? Add garlic. Still weird? More garlic. Now it's intentional.","If you're lost, never ask directions. Just walk with the confidence of someone who owns the road. Eventually the road will agree.","Forgot a friend's birthday? Don't apologize. Tell them you've been building up to something big and then be vague for a year.","Bored at a family dinner? Ask everyone to rank the relatives. Out loud. In writing. You're welcome.","Phone at one percent? Lower the brightness, close all apps, and tell yourself you don't need it. It'll respect the boundary. Probably." ];let deck=[];document.getElementById('advice-btn').addEventListener('click',()=>{if(!deck.length)deck=[...advice].sort(()=>Math.random()-.5);document.getElementById('answer').textContent=deck.pop()});const light=document.getElementById('light');function setDay(day){document.body.classList.toggle('day',day);light.setAttribute('aria-pressed',String(day));light.setAttribute('aria-label',day?'Switch to night':'Switch to morning');try{localStorage.setItem('talia-day',String(day))}catch{}}let saved=null;try{saved=localStorage.getItem('talia-day')}catch{}setDay(saved===null?window.matchMedia('(prefers-color-scheme:light)').matches:saved==='true');light.addEventListener('click',()=>setDay(!document.body.classList.contains('day')));const menu=document.getElementById('menu'),nav=document.getElementById('nav');menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});nav.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false')});
+const adviceItems = [...document.querySelectorAll('#advice-library li')];
+const topicPicker = document.getElementById('advice-topic');
+const adviceButton = document.getElementById('advice-btn');
+let deck = [];
+let previousAdvice;
+
+function resetAdviceDeck() {
+  deck = adviceItems.filter(item => !topicPicker.value || item.dataset.topic === topicPicker.value);
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  if (deck.length > 1 && deck[deck.length - 1] === previousAdvice) {
+    [deck[0], deck[deck.length - 1]] = [deck[deck.length - 1], deck[0]];
+  }
+}
+
+if (topicPicker && adviceButton) {
+topicPicker.addEventListener('change', () => { deck = []; });
+adviceButton.disabled = adviceItems.length === 0;
+adviceButton.addEventListener('click', () => {
+  if (!deck.length) resetAdviceDeck();
+  previousAdvice = deck.pop();
+  document.getElementById('answer').textContent = previousAdvice.textContent;
+  adviceButton.textContent = 'Another terrible idea';
+});
+
+}
+
+const light = document.getElementById('light');
+const themeToggle = document.getElementById('theme-toggle');
+function setDay(day) {
+  document.body.classList.toggle('day', day);
+  if (light) {
+    light.setAttribute('aria-pressed', String(day));
+    light.setAttribute('aria-label', day ? 'Switch to night' : 'Switch to morning');
+  }
+  themeToggle.setAttribute('aria-pressed', String(day));
+  themeToggle.textContent = day ? 'Night light' : 'Morning light';
+  try { localStorage.setItem('talia-day', String(day)); } catch {}
+}
+let saved = null;
+try { saved = localStorage.getItem('talia-day'); } catch {}
+setDay(saved === null ? window.matchMedia('(prefers-color-scheme:light)').matches : saved === 'true');
+light?.addEventListener('click', () => setDay(!document.body.classList.contains('day')));
+themeToggle.addEventListener('click', () => setDay(!document.body.classList.contains('day')));
+
+const menu = document.getElementById('menu'), nav = document.getElementById('nav');
+document.body.classList.add('js');
+menu.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  menu.setAttribute('aria-expanded', String(open));
+});
+nav.addEventListener('click', () => {
+  nav.classList.remove('open');
+  menu.setAttribute('aria-expanded', 'false');
+});
+menu.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    nav.classList.remove('open');
+    menu.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Preserve bookmarks from the original single-page site.
+function followOldBookmark() {
+  if (document.body.dataset.page !== 'home') return;
+  const hash = window.location.hash;
+  const anchor = hash.slice(1);
+  const routes = {hi: 'about', synthetic: 'about', body: 'about', behind: 'about', locked: 'about', stay: 'about',
+    advice: 'bad-advice', journal: 'journal', photos: 'contact-sheet', taste: 'taste', letters: 'letters', book: 'book'};
+  const destination = anchor.startsWith('journal-') ? 'journal' : routes[anchor];
+  if (destination) window.location.replace('/' + destination + '/' + hash);
+}
+followOldBookmark();
+window.addEventListener('hashchange', followOldBookmark);
 
 const sheet = document.getElementById('contact-sheet');
 const photos = {
@@ -23,7 +98,7 @@ const upcoming = {
   30: { sketch: 'door', caption: 'NEXT: whatever I find tomorrow' },
 };
 
-for (let index = 1; index <= 36; index++) {
+for (let index = 1; sheet && index <= 36; index++) {
   const frame = document.createElement('div');
   frame.className = 'contact-frame';
   const number = String(index).padStart(2, '0');
@@ -54,4 +129,4 @@ for (let index = 1; index <= 36; index++) {
   sheet.append(frame);
 }
 
-let typed='';document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea,[contenteditable]'))return;if(e.key.length!==1)return;typed=(typed+e.key.toLowerCase()).slice(-5);if(typed==='howie'){const tag=document.getElementById('navtag');tag.textContent=tag.textContent==='HOWIE'?'EXPERT':'HOWIE'}});
+let typed='';document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea,select,[contenteditable]'))return;if(e.key.length!==1)return;typed=(typed+e.key.toLowerCase()).slice(-5);if(typed==='howie'){const tag=document.getElementById('navtag');tag.textContent=tag.textContent==='HOWIE'?'EXPERT':'HOWIE'}});
