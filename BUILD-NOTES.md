@@ -30,5 +30,5 @@ Built from TALIA-PAGE-OUTLINE.md (Nov 25, 2026). Static HTML/CSS/JS; no build st
 - Optional performance and WCAG browser audit.
 - No deployment or Cloudflare Pages integration performed.
 
-## Local preview
-Open index.html in a browser, or run `python3 -m http.server 8000` in the repository root and visit http://localhost:8000.
+## Local preview and hosting
+Serve the checked-in site with `python3 -m http.server 8000 --directory public`. Cloudflare Pages uses `public` as its output directory with the build command blank. Run `python3 build.py` locally to regenerate the committed files after editing the sources.

@@ -101,8 +101,8 @@ def build_site(output):
 
 
 def main():
-    build_site(ROOT / 'dist')
-    print('Prepared eight pages in dist/ for Cloudflare Pages.')
+    build_site(ROOT / 'public')
+    print('Prepared eight pages in public/ for static hosting.')
 
 
 if __name__ == '__main__':
