@@ -216,11 +216,20 @@ select:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
   .js .top .menu { display: block; }
   .top nav { display: flex; flex-direction: column; width: 100%; }
   .js .top nav { display: none; }
-  .js .top nav.open { display: flex; }
+  .js .top nav.open {
+    display: flex;
+    max-height: calc(100dvh - 96px);
+    overflow-y: auto;
+  }
+  .js .top nav.open a { flex-shrink: 0; }
 }
 @media (max-width: 720px) {
   .room-grid { grid-template-columns: 1fr; }
   .home-rooms { padding-block: 36px; }
   .brand .tag { display: none; }
+  .letter {
+    margin-inline: 0;
+    padding: clamp(16px, 5vw, 35px);
+  }
 }
 .page-content .frame h1 { font-size: clamp(2rem, 4vw, 3.6rem); margin: 16px 0 25px; }
