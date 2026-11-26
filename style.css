@@ -218,6 +218,7 @@ select:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
   .js .top nav { display: none; }
   .js .top nav.open {
     display: flex;
+    flex-wrap: nowrap;
     max-height: calc(100dvh - 96px);
     overflow-y: auto;
   }
