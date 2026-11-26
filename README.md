@@ -2,16 +2,17 @@
 
 Talia's static multipage website, with **Bad Advice with Talia** and a **public journal**. It keeps the porch-light, film-camera design and identifies Talia as a fictional, synthetic character.
 
-## Preview and build
+## Preview and edit
 
-No packages are required. Use Python 3.10+:
+The finished site is committed in `public/`. Serve it directly with any static file server. For example:
 
 ```sh
-python3 build.py
-python3 -m http.server 8000 --directory dist
+python3 -m http.server 8000 --directory public
 ```
 
-Visit `http://localhost:8000`. The build renders the shared layout, individual pages, and approved content and copies only public website files into `dist/`. Both the journal and complete advice archive are readable without JavaScript; the topic picker, lantern, and mobile menu use JavaScript.
+Visit `http://localhost:8000`. The journal and complete advice archive are readable without JavaScript. The topic picker, lantern, and mobile menu use JavaScript.
+
+After editing templates, content, or assets, run `python3 build.py` locally with Python 3.10+ and commit the refreshed `public/` files with the source changes.
 
 ## Page structure
 
@@ -44,7 +45,7 @@ Edit `content/journal.json`. It starts empty; no journal entries have been inven
 
 Only entries with `published: true` appear. Dates use `YYYY-MM-DD`; slugs must be unique, lowercase, and hyphenated. Entries appear newest first and have permanent links such as `/journal/#journal-a-title-for-the-entry`. Titles and paragraphs are plain text, not HTML or Markdown. A human author should review Talia's writing before setting `published` to `true`.
 
-After editing content, run `python3 build.py` and deploy the new output. There is no online editor or automatic connection to Talia's runtime.
+After editing content, run `python3 build.py` and commit the updated `public/` files. There is no online editor or automatic connection to Talia's runtime.
 
 ## Update Bad Advice
 
@@ -52,11 +53,15 @@ Edit `content/advice.json`, an array of objects with `topic` and `text` fields, 
 
 ## Cloudflare Pages
 
-For a Git-connected Pages project, use build command `python3 build.py` and output directory `dist`, with this repository as the root. For an existing direct-upload project, upload the contents of `dist/` using its existing deployment workflow. No Worker, database, account credentials, or new service is needed.
+For Git-connected Cloudflare Pages, use these project settings:
 
-**Deploy only `dist/`, not the repository root.** The repository's source content may contain unpublished drafts; those source files are deliberately excluded from the output. Generated, unpublished entries are omitted from the HTML as well. Do not commit sensitive private writing to the repository.
+- Production branch: `main`
+- Root directory: repository root
+- Framework preset: None
+- Build command: leave blank
+- Build output directory: `public`
 
-This change prepares the site locally; it does not change your Cloudflare project settings or deploy it.
+For direct upload, upload the contents of `public/`. This directory contains only the served files. Templates, source content, and unpublished journal entries stay outside the deployment.
 
 ## Checks
 

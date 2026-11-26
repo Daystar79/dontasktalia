@@ -26,7 +26,7 @@ for (const page of pages) {
       append(...children) { this.children.push(...children); },
     };
   }
-  const file = page === 'home' ? 'dist/index.html' : `dist/${page}/index.html`;
+  const file = page === 'home' ? 'public/index.html' : `public/${page}/index.html`;
   for (const match of fs.readFileSync(file, 'utf8').matchAll(/\bid="([^"]+)"/g)) {
     elements.set(match[1], element());
   }
