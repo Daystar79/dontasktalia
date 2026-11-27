@@ -1,0 +1,7 @@
+# Cloudflare Pages: serve the committed static site in public/.
+# A blank/root output directory was publishing the repo itself (so /public/
+# had the site and / was a stale cached homepage). This file is the source
+# of truth for the build output directory on git deploys.
+name = "dontasktalia"
+compatibility_date = "2026-11-27"
+pages_build_output_dir = "public"

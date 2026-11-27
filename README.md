@@ -53,13 +53,13 @@ Edit `content/advice.json`, an array of objects with `topic` and `text` fields, 
 
 ## Cloudflare Pages
 
-For Git-connected Cloudflare Pages, use these project settings:
+`wrangler.toml` pins the Pages project name and build output directory. Git-connected deploys should use:
 
 - Production branch: `main`
 - Root directory: repository root
 - Framework preset: None
 - Build command: leave blank
-- Build output directory: `public`
+- Build output directory: `public` (set in `wrangler.toml` as `pages_build_output_dir`)
 
 For direct upload, upload the contents of `public/`. This directory contains only the served files. Templates, source content, and unpublished journal entries stay outside the deployment.
 
