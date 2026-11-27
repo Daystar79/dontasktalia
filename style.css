@@ -234,3 +234,5 @@ select:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
   }
 }
 .page-content .frame h1 { font-size: clamp(2rem, 4vw, 3.6rem); margin: 16px 0 25px; }
+
+.skits video{width:100%;border-radius:12px;display:block;background:#080b16}
